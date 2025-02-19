@@ -4,6 +4,13 @@ export function createCardsState() {
   try {
     cardsFromLocalStorage = JSON.parse(localStorage.getItem("cards"));
     weeksFromLocalStorage = JSON.parse(localStorage.getItem("weeks"));
+
+    // Update old localStorage data
+    for (let card of cardsFromLocalStorage) {
+      if (!card.hasOwnProperty("thresholdPercentage")) {
+        card.thresholdPercentage = 85;
+      }
+    }
   } catch (error) {
     console.log(error);
   }

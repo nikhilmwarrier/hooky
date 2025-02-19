@@ -9,6 +9,7 @@
     total = $bindable(1),
     classesPerWeek = $bindable(1),
     weeks = 12,
+    thresholdPercentage = $bindable(85),
   } = $props();
 
   import { getSkipDays, getSkipDaysExtrapolated } from "../helpers";
@@ -35,7 +36,6 @@
     if (thresholdPercentage < 5) thresholdPercentage = 5;
   });
 
-  let thresholdPercentage = $state(85);
   let threshold = $derived(thresholdPercentage / 100);
 
   let skipDays = $derived(getSkipDays(present, total, threshold));

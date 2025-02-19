@@ -13,6 +13,7 @@
       present: 1,
       total: 1,
       classesPerWeek: 1,
+      thresholdPercentage: 85,
     });
   }
 
@@ -44,6 +45,7 @@
         bind:present={card.present}
         bind:total={card.total}
         bind:classesPerWeek={card.classesPerWeek}
+        bind:thresholdPercentage={card.thresholdPercentage}
       />
     {/each}
   {/if}
