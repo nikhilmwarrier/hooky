@@ -9,7 +9,7 @@
 </script>
 
 <div class="wrapper">
-  <button onclick={ondecrement} {disabled}>-</button>
+  <button onclick={ondecrement} {disabled}>–</button>
   <input type="number" {...props} bind:value {disabled} />
   <button onclick={onincrement} {disabled}>+</button>
 </div>
@@ -21,7 +21,8 @@
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: stretch;
+    width: fit-content;
+    justify-content: space-between;
   }
 
   input {
@@ -30,6 +31,7 @@
     font-size: 1rem;
     text-align: center;
     padding: 0.25rem;
+    width: 4ch;
   }
 
   button {

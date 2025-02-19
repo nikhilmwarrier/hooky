@@ -2,8 +2,9 @@
   import { createCardsState } from "../state/store.svelte";
   import Card from "./Card.svelte";
   import CardPlusButton from "./CardPlusButton.svelte";
+  import NumberInput from "./NumberInput.svelte";
 
-  let { cards } = createCardsState();
+  let { cards, weeks } = createCardsState();
 
   function createCard() {
     cards.push({
@@ -21,12 +22,22 @@
   }
 </script>
 
+<div class="weeks-input-wrapper">
+  <label for="weeks-input">Number of weeks in semester: </label>
+  <NumberInput
+    size="2"
+    bind:value={weeks}
+    onincrement={() => weeks++}
+    ondecrement={() => weeks--}
+  />
+</div>
 <div class="deck" class:flex={cards.length === 0}>
   {#if cards.length === 0}
     <p>Add some courses to get started!</p>
   {:else}
     {#each cards as card (card.id)}
       <Card
+        {weeks}
         ondelete={onCardDelete}
         id={card.id}
         bind:title={card.title}
@@ -40,6 +51,17 @@
 </div>
 
 <style>
+  .weeks-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30rem;
+    max-width: 100%;
+    padding: 1rem;
+    margin: auto;
+    gap: 1rem;
+  }
+
   .deck {
     padding: 1rem;
     gap: 1rem;

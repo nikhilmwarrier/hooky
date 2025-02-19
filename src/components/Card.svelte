@@ -1,4 +1,6 @@
 <script>
+  import { fade, fly } from "svelte/transition";
+
   let {
     id,
     ondelete,
@@ -6,17 +8,13 @@
     present = $bindable(0),
     total = $bindable(1),
     classesPerWeek = $bindable(1),
+    weeks = 12,
   } = $props();
 
   import { getSkipDays, getSkipDaysExtrapolated } from "../helpers";
   import NumberInput from "./NumberInput.svelte";
   import PercentageCircle from "./PercentageCircle.svelte";
 
-  // let present = $state(4);
-  // let total = $state(6);
-
-  let weeks = $state(12);
-  // let classesPerWeek = $state(3);
   let totalInSemester = $derived(weeks * classesPerWeek);
   let extrapolatedSemesterAttendance = $derived(
     totalInSemester - (total - present)
@@ -35,8 +33,6 @@
     if (classesPerWeek < 1) classesPerWeek = 1;
   });
 
-  // let courseName = $state("Foundations of Computing");
-
   let threshold = 0.85;
 
   let skipDays = $derived(getSkipDays(present, total, threshold));
@@ -49,7 +45,11 @@
   );
 </script>
 
-<div class="card">
+<div
+  class="card"
+  in:fly={{ y: 100, duration: 200 }}
+  out:fade={{ duration: 200 }}
+>
   <button class="delete-btn" onclick={() => ondelete(id)}>&times;</button>
   <div class="title">
     <div class="course-name">
