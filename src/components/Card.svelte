@@ -31,9 +31,12 @@
     if (present > total) total = present;
     if (total < 1) total = 1;
     if (classesPerWeek < 1) classesPerWeek = 1;
+    if (thresholdPercentage > 95) thresholdPercentage = 95;
+    if (thresholdPercentage < 5) thresholdPercentage = 5;
   });
 
-  let threshold = 0.85;
+  let thresholdPercentage = $state(85);
+  let threshold = $derived(thresholdPercentage / 100);
 
   let skipDays = $derived(getSkipDays(present, total, threshold));
   let skipDaysExtrapolated = $derived(
@@ -124,10 +127,25 @@
   <div class="classes-per-week-wrapper">
     <label for="classesPerWeek">Classes per week: </label>
     <NumberInput
+      id="classesPerWeek"
       bind:value={classesPerWeek}
       size="3"
       onincrement={() => classesPerWeek++}
       ondecrement={() => classesPerWeek--}
+    />
+  </div>
+
+  <div class="classes-per-week-wrapper">
+    <label for="classesPerWeek">Target Percentage</label>
+    <NumberInput
+      bind:value={thresholdPercentage}
+      size="3"
+      min="1"
+      max="95"
+      onincrement={() =>
+        thresholdPercentage < 95 ? (thresholdPercentage += 5) : null}
+      ondecrement={() =>
+        thresholdPercentage > 5 ? (thresholdPercentage -= 5) : null}
     />
   </div>
 
