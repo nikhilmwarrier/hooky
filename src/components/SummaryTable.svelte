@@ -27,6 +27,7 @@
   .card {
     padding-top: 0.5rem;
     max-width: 100%;
+    border: none;
   }
 
   @media (min-width: 60rem) {
