@@ -20,6 +20,7 @@
   }
 
   button {
+    -webkit-tap-highlight-color: transparent;
     height: 100%;
     width: 100%;
     background: transparent;
@@ -29,6 +30,10 @@
     color: rgba(from var(--text-color) r g b / 0.7);
     transition: border 0.2s ease;
     border-radius: 12px;
+  }
+
+  button:active {
+    background: var(--button-active-color);
   }
 
   button:hover {

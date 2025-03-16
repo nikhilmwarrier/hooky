@@ -9,9 +9,9 @@
 </script>
 
 <div class="wrapper">
-  <button onclick={ondecrement} {disabled}>–</button>
+  <button class="left" onclick={ondecrement} {disabled}>–</button>
   <input type="number" {...props} bind:value {disabled} />
-  <button onclick={onincrement} {disabled}>+</button>
+  <button class="right" onclick={onincrement} {disabled}>+</button>
 </div>
 
 <style>
@@ -42,6 +42,18 @@
     font-size: inherit;
     font-weight: bolder;
     height: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button.left {
+    border-radius: 12px 0 0 12px;
+  }
+
+  button.right {
+    border-radius: 0 12px 12px 0;
+  }
+  button:active {
+    background: var(--button-active-color);
   }
 
   /* Hide spin box */
