@@ -1,10 +1,32 @@
 <script>
+  import { getSkipDaysExtrapolated } from "../helpers";
   import { createCardsState } from "../state/store.svelte";
   import Card from "./Card.svelte";
   import CardPlusButton from "./CardPlusButton.svelte";
   import NumberInput from "./NumberInput.svelte";
+  import SummaryTable from "./SummaryTable.svelte";
 
   let { cards, weeks } = createCardsState();
+
+  let bunkable = $derived(
+    cards
+      .map(card => {
+        let totalInSemester = weeks * card.classesPerWeek;
+        let extrapolatedSemesterAttendance =
+          totalInSemester - (card.total - card.present);
+
+        let exSkipDays = getSkipDaysExtrapolated(
+          extrapolatedSemesterAttendance,
+          totalInSemester,
+          card.thresholdPercentage / 100
+        );
+
+        return { title: card.title, skip: exSkipDays };
+      })
+      .filter(card => card.title && card.skip > 0)
+  );
+
+  $effect(() => console.log("BUNKABLE", bunkable));
 
   function createCard() {
     cards.push({
@@ -24,7 +46,7 @@
 </script>
 
 <div class="weeks-input-wrapper">
-  <label for="weeks-input">Number of weeks in semester: </label>
+  <label for="weeks-input">Weeks in semester: </label>
   <NumberInput
     size="2"
     bind:value={weeks}
@@ -36,6 +58,9 @@
   {#if cards.length === 0}
     <p>Add some courses to get started!</p>
   {:else}
+    {#if bunkable && bunkable.length > 0}
+      <SummaryTable {bunkable} />
+    {/if}
     {#each cards as card (card.id)}
       <Card
         {weeks}

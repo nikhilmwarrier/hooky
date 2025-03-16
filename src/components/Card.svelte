@@ -170,16 +170,6 @@
 </div>
 
 <style>
-  .card {
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: relative;
-  }
-
   .delete-btn {
     position: absolute;
     right: 0.5rem;
@@ -200,26 +190,6 @@
 
   .delete-btn:hover {
     background: rgba(from var(--border-color) r g b / 0.7);
-  }
-
-  table,
-  tr,
-  td {
-    border: 1px solid var(--border-color);
-    border-collapse: collapse;
-  }
-
-  td.number {
-    text-align: right;
-  }
-
-  table {
-    border-radius: 12px;
-  }
-
-  td {
-    padding: 0.5rem;
-    min-width: 3ch;
   }
 
   .rest {

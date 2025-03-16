@@ -8,15 +8,11 @@
 
 <style>
   .card {
-    border-radius: 12px;
     border: 1px dashed var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    min-width: 15rem;
-    max-width: 30rem;
-    flex: 0 0 auto;
+    padding: 0;
   }
 
   button {
