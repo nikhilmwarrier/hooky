@@ -2,7 +2,7 @@
 
 Bunk classes the smart way.
 
-![Screenshot](./src/assets/screenshot.png)
+![Screenshot](./public/screenshots/430x932.png)
 
 ## Build and run
 

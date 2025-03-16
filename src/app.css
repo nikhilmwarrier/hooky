@@ -20,7 +20,7 @@
 
   --border-color: #1e1e1e;
   --text-color: #efefef;
-  --button-active-color: rgba(138, 138, 138, 0.3);
+  --button-active-color: rgba(from var(--border-color) r g b / 0.7);
 }
 
 .cedarville-cursive-regular {
