@@ -3,7 +3,7 @@
 </script>
 
 <div class="card">
-  <h3>Classes you can bunk</h3>
+  <h3>Classes you can skip</h3>
   <table>
     <thead>
       <tr>
