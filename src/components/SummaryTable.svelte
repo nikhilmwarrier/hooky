@@ -93,6 +93,7 @@
     align-items: center;
     justify-content: space-between;
     transition: border-radius 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .summary-chevron-down {
