@@ -1,17 +1,15 @@
 <script>
   import { getSkipDaysExtrapolated } from "../helpers";
-  import { createCardsState } from "../state/store.svelte";
+  import { state } from "../state/store.svelte";
   import Card from "./Card.svelte";
   import CardPlusButton from "./CardPlusButton.svelte";
   import NumberInput from "./NumberInput.svelte";
   import SummaryTable from "./SummaryTable.svelte";
 
-  let { cards, weeks } = createCardsState();
-
   let bunkable = $derived(
-    cards
+    state.cards
       .map(card => {
-        let totalInSemester = weeks * card.classesPerWeek;
+        let totalInSemester = state.weeks * card.classesPerWeek;
         let extrapolatedSemesterAttendance =
           totalInSemester - (card.total - card.present);
 
@@ -29,7 +27,7 @@
   $effect(() => console.log("BUNKABLE", bunkable));
 
   function createCard() {
-    cards.push({
+    state.cards.push({
       id: crypto.randomUUID(),
       title: "",
       present: 1,
@@ -40,8 +38,8 @@
   }
 
   function onCardDelete(id) {
-    const idx = cards.findIndex(el => el.id === id);
-    cards.splice(idx, 1);
+    const idx = state.cards.findIndex(el => el.id === id);
+    state.cards.splice(idx, 1);
   }
 </script>
 
@@ -49,21 +47,21 @@
   <label for="weeks-input">Weeks in semester: </label>
   <NumberInput
     size="2"
-    bind:value={weeks}
-    onincrement={() => weeks++}
-    ondecrement={() => weeks--}
+    bind:value={state.weeks}
+    onincrement={() => state.weeks++}
+    ondecrement={() => state.weeks--}
   />
 </div>
-<div class="deck" class:flex={cards.length === 0}>
-  {#if cards.length === 0}
+<div class="deck" class:flex={state.cards.length === 0}>
+  {#if state.cards.length === 0}
     <p>Add some courses to get started!</p>
   {:else}
     {#if bunkable && bunkable.length > 0}
       <SummaryTable {bunkable} />
     {/if}
-    {#each cards as card (card.id)}
+    {#each state.cards as card (card.id)}
       <Card
-        {weeks}
+        weeks={state.weeks}
         ondelete={onCardDelete}
         id={card.id}
         bind:title={card.title}
