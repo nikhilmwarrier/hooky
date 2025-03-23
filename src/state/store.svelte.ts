@@ -11,6 +11,12 @@ class GlobalState {
     } catch (err) {
       console.error(err);
     }
+
+    $effect.root(() => {
+      $effect(() => {
+        localStorage.setItem("cards", JSON.stringify(this.#cards));
+      });
+    });
   }
 
   get cards() {
@@ -19,7 +25,6 @@ class GlobalState {
 
   set cards(value) {
     this.#cards = value;
-    localStorage.setItem("cards", JSON.stringify(value));
   }
 
   get weeks() {
