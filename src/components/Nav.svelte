@@ -15,7 +15,9 @@
 <svelte:window onbeforeinstallprompt={handleBeforeInstallPrompt} />
 
 <nav>
-  <span class="cedarville-cursive-regular"> Hooky </span>
+  <span class="cedarville-cursive-regular">
+    Hooky <span class="beta">BETA</span>
+  </span>
   {#if deferredPrompt}
     <button class="install" onclick={handleInstall}> Install </button>
   {/if}
@@ -27,6 +29,17 @@
     padding: 1rem 2rem;
     font-size: 2.5rem;
     text-align: center;
+  }
+
+  .beta {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    background: #3c9ee5;
+    color: black;
+    border-radius: 8px;
+    padding: 0.25rem 0.4rem;
+    font-weight: bold;
+    position: absolute;
   }
 
   button {
