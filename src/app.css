@@ -4,7 +4,6 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
@@ -18,9 +17,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --font-sans: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --border-color: #1e1e1e;
   --text-color: #efefef;
   --button-active-color: rgba(from var(--border-color) r g b / 0.7);
+
+  font-family: var(--font-sans);
 }
 
 .cedarville-cursive-regular {

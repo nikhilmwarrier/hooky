@@ -19,9 +19,13 @@
           card.thresholdPercentage / 100
         );
 
-        return { title: card.title, skip: exSkipDays };
+        return {
+          title: card.title || "Untitled",
+          skip: exSkipDays,
+          total: card.total,
+        };
       })
-      .filter(card => card.title && card.skip > 0)
+      .filter(card => card.total > 1 && card.skip > 0)
   );
 
   $effect(() => console.log("BUNKABLE", bunkable));
@@ -56,9 +60,7 @@
   {#if state.cards.length === 0}
     <p>Add some courses to get started!</p>
   {:else}
-    {#if bunkable && bunkable.length > 0}
-      <SummaryTable {bunkable} />
-    {/if}
+    <SummaryTable {bunkable} />
     {#each state.cards as card (card.id)}
       <Card
         weeks={state.weeks}
