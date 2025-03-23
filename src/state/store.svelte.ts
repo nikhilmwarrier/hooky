@@ -14,13 +14,13 @@ class GlobalState {
 
     $effect.root(() => {
       $effect(() => {
-        localStorage.setItem("cards", JSON.stringify(this.#cards));
+        localStorage.setItem("cards", JSON.stringify(this.#cards ?? []));
       });
     });
   }
 
   get cards() {
-    return this.#cards;
+    return this.#cards || [];
   }
 
   set cards(value) {
@@ -28,7 +28,7 @@ class GlobalState {
   }
 
   get weeks() {
-    return this.#weeks;
+    return this.#weeks || 12;
   }
 
   set weeks(value) {
